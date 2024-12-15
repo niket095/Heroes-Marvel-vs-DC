@@ -13,6 +13,11 @@
 		CE7EFFDD2D0A0D7C00DFD9FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7EFFDC2D0A0D7C00DFD9FD /* Assets.xcassets */; };
 		CE7EFFE02D0A0D7C00DFD9FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7EFFDE2D0A0D7C00DFD9FD /* LaunchScreen.storyboard */; };
 		CE7EFFE82D0A0E1300DFD9FD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EFFE72D0A0E1300DFD9FD /* CollectionViewController.swift */; };
+		CE914A982D0D9B3F00337A8E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE914A972D0D9B3F00337A8E /* API.swift */; };
+		CE914A9A2D0D9B5100337A8E /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE914A992D0D9B5100337A8E /* NetworkRequest.swift */; };
+		CE914A9C2D0D9B7200337A8E /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE914A9B2D0D9B7200337A8E /* NetworkDataFetch.swift */; };
+		CE914A9F2D0DA0F700337A8E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE914A9E2D0DA0F700337A8E /* CollectionViewCell.swift */; };
+		CED6EE522D0D95DF00200B88 /* HeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6EE512D0D95DF00200B88 /* HeroViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		CE7EFFDF2D0A0D7C00DFD9FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE7EFFE12D0A0D7C00DFD9FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7EFFE72D0A0E1300DFD9FD /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		CE914A972D0D9B3F00337A8E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		CE914A992D0D9B5100337A8E /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		CE914A9B2D0D9B7200337A8E /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
+		CE914A9E2D0DA0F700337A8E /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		CED6EE512D0D95DF00200B88 /* HeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,68 @@
 		CE7EFFD22D0A0D7A00DFD9FD /* Heroes Marvel vs DC */ = {
 			isa = PBXGroup;
 			children = (
+				CED6EE542D0D960D00200B88 /* Application */,
+				CED6EE552D0D962200200B88 /* Model */,
+				CE914A962D0D9ADB00337A8E /* Network */,
+				CED6EE562D0D964500200B88 /* Controllers */,
+				CED6EE572D0D968700200B88 /* Resources */,
+			);
+			path = "Heroes Marvel vs DC";
+			sourceTree = "<group>";
+		};
+		CE914A962D0D9ADB00337A8E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CE914A972D0D9B3F00337A8E /* API.swift */,
+				CE914A992D0D9B5100337A8E /* NetworkRequest.swift */,
+				CE914A9B2D0D9B7200337A8E /* NetworkDataFetch.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CE914A9D2D0DA0C800337A8E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CE914A9E2D0DA0F700337A8E /* CollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		CED6EE542D0D960D00200B88 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				CE7EFFD32D0A0D7A00DFD9FD /* AppDelegate.swift */,
 				CE7EFFD52D0A0D7A00DFD9FD /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CED6EE552D0D962200200B88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CED6EE512D0D95DF00200B88 /* HeroViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CED6EE562D0D964500200B88 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				CE7EFFD72D0A0D7A00DFD9FD /* MainViewController.swift */,
 				CE7EFFE72D0A0E1300DFD9FD /* CollectionViewController.swift */,
+				CE914A9D2D0DA0C800337A8E /* Cell */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CED6EE572D0D968700200B88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				CE7EFFDC2D0A0D7C00DFD9FD /* Assets.xcassets */,
 				CE7EFFDE2D0A0D7C00DFD9FD /* LaunchScreen.storyboard */,
 				CE7EFFE12D0A0D7C00DFD9FD /* Info.plist */,
 			);
-			path = "Heroes Marvel vs DC";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +201,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7EFFE82D0A0E1300DFD9FD /* CollectionViewController.swift in Sources */,
+				CE914A9C2D0D9B7200337A8E /* NetworkDataFetch.swift in Sources */,
+				CE914A9F2D0DA0F700337A8E /* CollectionViewCell.swift in Sources */,
 				CE7EFFD82D0A0D7A00DFD9FD /* MainViewController.swift in Sources */,
+				CE914A9A2D0D9B5100337A8E /* NetworkRequest.swift in Sources */,
 				CE7EFFD42D0A0D7A00DFD9FD /* AppDelegate.swift in Sources */,
 				CE7EFFD62D0A0D7A00DFD9FD /* SceneDelegate.swift in Sources */,
+				CE914A982D0D9B3F00337A8E /* API.swift in Sources */,
+				CED6EE522D0D95DF00200B88 /* HeroViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +349,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3B4857HXNH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Heroes Marvel vs DC/Info.plist";
+				INFOPLIST_FILE = "Heroes Marvel vs DC/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -309,7 +377,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3B4857HXNH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Heroes Marvel vs DC/Info.plist";
+				INFOPLIST_FILE = "Heroes Marvel vs DC/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

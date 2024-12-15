@@ -7,17 +7,17 @@
 
 import UIKit
 
-protocol SelectHero: UIViewController {
+protocol SelectHeroProtocol: UIViewController {
     func selectHero(image: String)
 }
 
 class CollectionViewController: UIViewController {
-
+    
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "background")
         imageView.alpha = 0.6
-    
+        
         return imageView
     }()
     
@@ -34,12 +34,12 @@ class CollectionViewController: UIViewController {
         return collectionView
     }()
     
-    var heroArray = [String]()
-    weak var selectHeroDelegate: SelectHero?
+    var heroArray = [HeroModelElement]()
+    weak var selectHeroDelegate: SelectHeroProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         setupViews()
     }
     
@@ -52,7 +52,7 @@ class CollectionViewController: UIViewController {
         backgroundImageView.frame = view.bounds
         collectionView.frame = view.bounds
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.cellID)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -65,19 +65,10 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell",
-                                                      for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cellID,
+                                                      for: indexPath) as! CollectionViewCell
         let model = heroArray[indexPath.row]
-        let imageView = UIImageView()
-        
-        imageView.image = UIImage(named: model)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = cell.contentView.bounds
-        imageView.layer.cornerRadius = 44
-        imageView.clipsToBounds = true
-        
-        cell.contentView.addSubview(imageView)
-        
+        cell.cellHeroConfigure(with: model)
         return cell
     }
     
@@ -87,12 +78,24 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell",
-                                                      for: indexPath)
-    
+
         let model = heroArray[indexPath.row]
         
-        selectHeroDelegate?.selectHero(image: model)
+        selectHeroDelegate?.selectHero(image: model.thumbnail.url?.absoluteString ?? "")
     }
 }
+
+/*
+ пример:
+ в делегате коллекции, в методе, где обрабатывается нажатие на ячейку - с помощью протокола мы передаем картинку, которая находится в ячейке, которую нажал пользователь (картинка высчитана из массива с данными с помощью indexPath):
+ 
+ func collectionView(___ didSelectItemAt___) {
+ 
+ let cell = ...
+ let image = someArray(indexPath.row)
+ 
+ selectHeroDelegate?.selectHero(image: image)
+ переменная-ссылкаНаПротокол.МетодПротокола(тип: картинка из ячейки)
+ }
+ 
+ */

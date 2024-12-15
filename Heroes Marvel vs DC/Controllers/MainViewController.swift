@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    private let marvelArray = ["1_1", "1_2"]
+    //private let marvelArray = ["1_1", "1_2"]
     private let dcArray = ["2_1", "2_2"]
 
     override func viewDidLoad() {
@@ -71,8 +71,8 @@ class MainViewController: UIViewController {
         
         backgroundImageView.frame = view.bounds
     }
-    
-    private func setupArray(_ array: [String], label: String) {
+    //здесь поменял тип данных массива
+    private func setupArray(_ array: [HeroModelElement], label: String) {
         let vc = CollectionViewController()
         vc.title = label
         vc.heroArray = array
@@ -86,15 +86,24 @@ class MainViewController: UIViewController {
         present(vc, animated: true)
     }
     
+    //здесь все поменялось
     @objc private func buttonTapped(_ sender: UIButton) {
-        if sender.tag == 0 {
-            setupArray(marvelArray, label: "Select MARVEL hero")
-        } else {
-            setupArray(dcArray, label: "Select DC hero")
+            if sender.tag == 0 {
+                NetworkDataFetch.shared.fetchHeroes { [weak self] heroes, error in
+                    guard let self = self, let heroes = heroes else {
+                        print("Error fetching heroes: \(error?.localizedDescription ?? "Unknown error")")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.setupArray(heroes, label: "Select MARVEL hero")
+                    }
+                }
+            } else {
+                let heroElements = dcArray.map { HeroModelElement(id: 0, name: $0, thumbnail: Thumbnail(path: $0, thumbnailExtension: "jpg")) }
+                setupArray(heroElements, label: "Select DC hero")
+            }
         }
     }
-}
-
 
 extension MainViewController {
     
@@ -119,7 +128,7 @@ extension MainViewController {
     }
 }
 
-extension MainViewController: SelectHero {
+extension MainViewController: SelectHeroProtocol {
     func selectHero(image: String) {
         heroImageView.image = UIImage(named: image)
     }
