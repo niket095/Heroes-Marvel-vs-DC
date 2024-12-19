@@ -12,7 +12,7 @@ class NetworkDataFetch {
     static let shared = NetworkDataFetch()
     private init() {}
     
-    func fetchHeroes(responce: @escaping (HeroModel?, Error?) -> Void) {
+    func fetchMarvelHeroes(responce: @escaping (HeroModel?, Error?) -> Void) {
         NetworkRequest.shared.requestData(url: API.url) { result in
             switch result {
             case .success(let data):
@@ -28,5 +28,9 @@ class NetworkDataFetch {
             }
         }
     }
+
+    
+       
+   
 }
 

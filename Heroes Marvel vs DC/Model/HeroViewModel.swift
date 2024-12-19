@@ -1,14 +1,11 @@
 //
 //  HeroViewModel.swift
 //  Heroes Marvel vs DC
-//
-//  Created by Nikita Putilov on 14.12.2024.
-//
 
 import Foundation
 
 // MARK: - HeroModelElement
-struct HeroModelElement: Codable {
+struct HeroMarvelModel: Codable {
     let id: Int
     let name: String
     let thumbnail: Thumbnail
@@ -19,8 +16,8 @@ struct Thumbnail: Codable {
     let path: String
     let thumbnailExtension: String
 
-    var url: URL? {
-        return URL(string: path + "." + thumbnailExtension)
+    var url: String {
+        return path + "." + thumbnailExtension
     }
 
     enum CodingKeys: String, CodingKey {
@@ -29,5 +26,4 @@ struct Thumbnail: Codable {
     }
 }
 
-// Создаем псевдоним для массива с героями. Говорим HeroModel, а подразумеваем массив героев [HeroModelElement]
-typealias HeroModel = [HeroModelElement]
+typealias HeroModel = [HeroMarvelModel]

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C20A78D2D11F7D4001D9A91 /* DCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20A78C2D11F7D4001D9A91 /* DCModel.swift */; };
 		CE7EFFD42D0A0D7A00DFD9FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EFFD32D0A0D7A00DFD9FD /* AppDelegate.swift */; };
 		CE7EFFD62D0A0D7A00DFD9FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EFFD52D0A0D7A00DFD9FD /* SceneDelegate.swift */; };
 		CE7EFFD82D0A0D7A00DFD9FD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EFFD72D0A0D7A00DFD9FD /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C20A78C2D11F7D4001D9A91 /* DCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCModel.swift; sourceTree = "<group>"; };
 		CE7EFFD02D0A0D7A00DFD9FD /* Heroes Marvel vs DC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Heroes Marvel vs DC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7EFFD32D0A0D7A00DFD9FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE7EFFD52D0A0D7A00DFD9FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				CED6EE512D0D95DF00200B88 /* HeroViewModel.swift */,
+				4C20A78C2D11F7D4001D9A91 /* DCModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C20A78D2D11F7D4001D9A91 /* DCModel.swift in Sources */,
 				CE7EFFE82D0A0E1300DFD9FD /* CollectionViewController.swift in Sources */,
 				CE914A9C2D0D9B7200337A8E /* NetworkDataFetch.swift in Sources */,
 				CE914A9F2D0DA0F700337A8E /* CollectionViewCell.swift in Sources */,
