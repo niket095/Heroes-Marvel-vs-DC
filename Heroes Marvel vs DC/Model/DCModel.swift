@@ -2,7 +2,7 @@
 //  DCModel.swift
 //  Heroes Marvel vs DC
 //
-//  Created by Tim Akhmetov on 17.12.2024.
+//  Created by Nikita Putilov on 17.12.2024.
 //
 
 import Foundation

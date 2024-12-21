@@ -12,23 +12,27 @@ class MainViewController: UIViewController {
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "background")
+        imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         return imageView
     }()
     
     private var heroImageView: UIImageView = {
         let imageView = UIImageView()
-//imageView.image = UIImage(named: "hero")
+        //imageView.image = UIImage(named: "hero")
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+    //let catButtonImage = UIImage(named: "catBackground")
+    
     lazy var marvelButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .red
-        button.setTitle("MARVEL", for: .normal)
+        //button.setImage(catButtonImage, for: .normal)
+        button.setTitle("CAT", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.tag = 0
         button.layer.cornerRadius = 6
@@ -38,10 +42,13 @@ class MainViewController: UIViewController {
         return button
     }()
     
+    //let dogButtonImage = UIImage(named: "dogBackground")
+    
     lazy var dcButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .darkGray
-        button.setTitle("DC", for: .normal)
+        //button.setImage(dogButtonImage, for: .normal)
+        button.setTitle("DOG", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.tag = 1
         button.layer.cornerRadius = 6
@@ -61,7 +68,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setupMArvelArray()
-     
+        
         setupViews()
         setConstraints()
         setupDcArray()
@@ -77,14 +84,14 @@ class MainViewController: UIViewController {
         
         backgroundImageView.frame = view.bounds
     }
- 
-    private func setupArray(_ array: [UIImage], flag: Bool, label: String) {
+    
+    private func setupArray(_ array: [UIImage], flag: Bool, animals: String,  label: String) {
         let vc = CollectionViewController()
         vc.heroLabel.text = label
         vc.isUsingArray = flag
         vc.heroArray.removeAll()
         vc.heroArray = array
-        fetchAllHTTPPetsImages(pet: flag)
+        fetchAllHTTPPetsImages(pet: animals)
         vc.marvelArray = marvelArray
         vc.selectHeroDelegate = self
         
@@ -124,81 +131,80 @@ class MainViewController: UIViewController {
         //        }
     }
     
-    func fetchAllHTTPPetsImages(pet: Bool) {
-      //  let statusCodes = 100...599
+    func fetchAllHTTPPetsImages(pet: String) {
         codeArray.sort()
         for statusCode in codeArray {
-          
-            if pet == true {
-                NetworkRequest.shared.fetchHTTPDogImage(statusCode: statusCode) { code, image in
-                    if let image = image {
-                    //    DispatchQueue.main.async {
-                            self.petsArray.append(image)
-                           
-                    //    }
-                    } else {
-                        self.petsArray.append(UIImage(named: "2_1")!)
-                       // heroImageView.image = UIImage(named: "2_1")
-                        print("No image for \(statusCode)!")
-                    }
-                }
-            } else if pet == false {
-                NetworkRequest.shared.fetchHTTPCatImage(statusCode: statusCode) { code, image in
-                    if let image = image {
-                     //   DispatchQueue.main.async {
-                            self.petsCatsArray.append(image)
-                      //  }
-                    } else {
-                        print("No image for \(statusCode)!")
-                    }
+            NetworkRequest.shared.fetchHTTPAnimalsImage(animal: pet, statusCode: statusCode) { code, image in
+                var animalsArray = pet
+                if let image = image {
+                    if pet == "dog" {
+                        self.petsArray.append(image)
+                    } else if pet == "cat" {
+                        self.petsCatsArray.append(image)}
+                } else {
+                    self.petsArray.append(UIImage(named: "noName")!)
+                    self.petsCatsArray.append(UIImage(named: "noName")!)
                 }
             }
-            
-           
         }
     }
-//        NetworkDataFetch.shared.fetchHeroes { [weak self] heroes in
-//            guard let self = self, let heroes = heroes else {
-//              //  print("Error fetching heroes: \(error?.localizedDescription ?? "Unknown error")")
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.dcArray1 = heroes
-//                print(self.dcArray1)
-//            }
-//        }
-    
+    // как было
+    //            if pet == "dog" {
+    //                NetworkRequest.shared.fetchHTTPAnimalsImage(animal: pet, statusCode: statusCode) { code, image in
+    //                    if let image = image {
+    //                        //    DispatchQueue.main.async {
+    //                        self.petsArray.append(image)
+    //
+    //                        //    }
+    //                    } else {
+    //                        self.petsArray.append(UIImage(named: "noName")!)
+    //                        // heroImageView.image = UIImage(named: "noName")
+    //                        print("No image for \(statusCode)!")
+    //                    }
+    //                }
+    //            } else if pet == "cat" {
+    //                NetworkRequest.shared.fetchHTTPAnimalsImage(animal: pet, statusCode: statusCode) { code, image in
+    //                    if let image = image {
+    //                        //   DispatchQueue.main.async {
+    //                        self.petsCatsArray.append(image)
+    //                        //  }
+    //                    } else {
+    //                        print("No image for \(statusCode)!")
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     @objc private func buttonTapped(_ sender: UIButton) {
-            if sender.tag == 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.setupArray(self.petsCatsArray, flag: false, label: "Select CAT hero")
-                }
-            } else {
-                setupArray(petsArray, flag: true, label: "Select DOG hero")
+        if sender.tag == 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.setupArray(self.petsCatsArray, flag: false, animals: "cat", label: "Select CAT hero")
             }
+        } else {
+            setupArray(petsArray, flag: true, animals: "dog", label: "Select DOG hero")
         }
     }
+}
 
 extension MainViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-        heroImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-        heroImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        heroImageView.widthAnchor.constraint(equalToConstant: view.frame.width - 10),
-        heroImageView.heightAnchor.constraint(equalToConstant: 420),
-        
-        marvelButton.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 30),
-        marvelButton.leadingAnchor.constraint(equalTo: heroImageView.leadingAnchor),
-        marvelButton.trailingAnchor.constraint(equalTo: heroImageView.centerXAnchor, constant: -10),
-        marvelButton.heightAnchor.constraint(equalToConstant: 65),
-        
-        dcButton.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 30),
-        dcButton.trailingAnchor.constraint(equalTo: heroImageView.trailingAnchor),
-        dcButton.leadingAnchor.constraint(equalTo: heroImageView.centerXAnchor, constant: 10),
-        dcButton.heightAnchor.constraint(equalToConstant: 65),
+            heroImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            heroImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            heroImageView.widthAnchor.constraint(equalToConstant: view.frame.width - 10),
+            heroImageView.heightAnchor.constraint(equalToConstant: 420),
+            
+            marvelButton.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 30),
+            marvelButton.leadingAnchor.constraint(equalTo: heroImageView.leadingAnchor),
+            marvelButton.trailingAnchor.constraint(equalTo: heroImageView.centerXAnchor, constant: -10),
+            marvelButton.heightAnchor.constraint(equalToConstant: 65),
+            
+            dcButton.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 30),
+            dcButton.trailingAnchor.constraint(equalTo: heroImageView.trailingAnchor),
+            dcButton.leadingAnchor.constraint(equalTo: heroImageView.centerXAnchor, constant: 10),
+            dcButton.heightAnchor.constraint(equalToConstant: 65),
         ])
     }
 }

@@ -1,6 +1,8 @@
 //
 //  HeroViewModel.swift
 //  Heroes Marvel vs DC
+//
+//  Created by Nikita Putilov on 11.12.2024.
 
 import Foundation
 

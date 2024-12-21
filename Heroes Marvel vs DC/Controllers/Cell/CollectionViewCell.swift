@@ -47,7 +47,7 @@ class CollectionViewCell: UICollectionViewCell {
         cellImageView.image = image
     }
         
-    public func cellHeroConfigure(with model: HeroMarvelModel) {        
+    public func cellHeroConfigure(with model: HeroMarvelModel) {
         let url = model.thumbnail.url
         
         NetworkRequest.shared.requestData(url: url) { [weak self] result in
