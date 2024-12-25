@@ -13,24 +13,24 @@ protocol SelectHeroProtocol: UIViewController {
 
 class CollectionViewController: UIViewController {
     
+    //MARK: - UI elements
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "background")
         imageView.alpha = 0.2
-        
         return imageView
     }()
     
-    var heroLabel: UILabel = {
+    var petLabel: UILabel = {
         let label = UILabel()
-        label.text = "Select hero"
+        label.text = "Select pet"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 1
@@ -45,26 +45,28 @@ class CollectionViewController: UIViewController {
     }()
     
     var isUsingArray = true
-    var marvelArray = [HeroMarvelModel]()
-    var heroArray = [UIImage]()
+    var petArray = [UIImage]()
     var catArray = [UIImage]()
     weak var selectHeroDelegate: SelectHeroProtocol?
+    
+    //MARK: - Life cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
         setupViews()
-        
         setConstraints()
     }
     
+    //MARK: - Setup
     private func setupViews() {
         view.backgroundColor = .white
         
         view.addSubview(backgroundImageView)
-        view.addSubview(heroLabel)
+        view.addSubview(petLabel)
         view.addSubview(collectionView)
         
         backgroundImageView.frame = view.bounds
@@ -74,41 +76,35 @@ class CollectionViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    //MARK: - Constraints
     private func setConstraints() {
         NSLayoutConstraint.activate([
             
-            heroLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            heroLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            heroLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            petLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            petLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            petLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: heroLabel.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: petLabel.bottomAnchor, constant: 20),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            ])
+        ])
     }
-    
-    
 }
 
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        heroArray.count
+        petArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cellID,
                                                       for: indexPath) as! CollectionViewCell
-//        if isUsingArray {
-//            let model = marvelArray[indexPath.row]
-//            cell.cellHeroConfigure(with: model)
-//        } else {
-            let model = heroArray[indexPath.row]
-            cell.cell2HeroConfigure(with: model)
-       // }
         
-       
+        let model = petArray[indexPath.row]
+        cell.cell2HeroConfigure(with: model)
+        
         return cell
     }
     
@@ -120,12 +116,9 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell
-
-        guard let image = cell?.cellImageView.image else { return }
-       
-            let model = heroArray[indexPath.row]
-            selectHeroDelegate?.selectHero(image: image, name: "BATMAN!")
         
-      
+        guard let image = cell?.cellImageView.image else { return }
+        
+        selectHeroDelegate?.selectHero(image: image, name: "DOG!")
     }
 }

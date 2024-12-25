@@ -18,7 +18,6 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: "hero")
         imageView.clipsToBounds = true
          imageView.layer.cornerRadius = 12
-      //   clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -26,7 +25,6 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK: - Life cycle
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
     
     override init(frame: CGRect) {
@@ -37,31 +35,11 @@ class CollectionViewCell: UICollectionViewCell {
     
     //MARK: - Setup
     private func setupCell() {
-        
-        
-        
         addSubview(cellImageView)
     }
     
     public func cell2HeroConfigure(with image: UIImage) {
         cellImageView.image = image
-    }
-        
-    public func cellHeroConfigure(with model: HeroMarvelModel) {
-        let url = model.thumbnail.url
-        
-        NetworkRequest.shared.requestData(url: url) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let data):
-                let dataImage = UIImage(data: data)
-           
-                self.cellImageView.image = dataImage
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
     }
     
     //MARK: - Constraints

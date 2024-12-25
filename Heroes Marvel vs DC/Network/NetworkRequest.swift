@@ -50,55 +50,7 @@ class NetworkRequest {
                 return }
             completion(statusCode, image)
         }
-    task.resume()
-}
-    
-//    func fetchHTTPCatImage(statusCode: Int, completion: @escaping (Int, UIImage?) -> Void) {
-//        let urlString = "https://http.cat/\(statusCode).jpg"
-//        guard let url = URL(string: urlString) else {
-//            print("Ошибка кода статуса: \(statusCode)")
-//            completion(statusCode, nil)
-//            return
-//        }
-//
-//        let task = URLSession.shared.dataTask(with: url) { (data, responce, error) in
-//
-//            if let error = error {
-//                print("Ошибка кода статуса: \(statusCode) : \(error.localizedDescription)")
-//                completion(statusCode, nil)
-//                return
-//            }
-//
-//            guard let data = data, let image = UIImage(data: data) else {
-//                completion(statusCode, nil)
-//                return }
-//            completion(statusCode, image)
-//        }
-//    task.resume()
-//}
-//
-//    func fetchHTTPDogImage(statusCode: Int, completion: @escaping (Int, UIImage?) -> Void) {
-//        let urlString = "https://http.dog/\(statusCode).jpg"
-//        guard let url = URL(string: urlString) else {
-//            print("Ошибка кода статуса: \(statusCode)")
-//            completion(statusCode, nil)
-//            return
-//        }
-//
-//        let task = URLSession.shared.dataTask(with: url) { (data, responce, error) in
-//
-//            if let error = error {
-//                print("Ошибка кода статуса: \(statusCode) : \(error.localizedDescription)")
-//                completion(statusCode, nil)
-//                return
-//            }
-//
-//            guard let data = data, let image = UIImage(data: data) else {
-//                completion(statusCode, nil)
-//                return }
-//            completion(statusCode, image)
-//        }
-//    task.resume()
-//}
+        task.resume()
+    }
 }
 
