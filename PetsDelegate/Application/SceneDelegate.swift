@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  Heroes Marvel vs DC
+//  PetsDelegate
 //
 //  Created by Nikita Putilov on 11.12.2024.
 //

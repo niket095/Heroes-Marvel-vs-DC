@@ -1,6 +1,6 @@
 //
 //  CollectionViewCell.swift
-//  Heroes Marvel vs DC
+//  PetsDelegate
 //
 //  Created by Nikita Putilov on 14.12.2024.
 //
@@ -11,13 +11,13 @@ class CollectionViewCell: UICollectionViewCell {
     
     static let cellID = "CollectionViewCell"
     
-    //MARK: - UI elements
+    //MARK: - UI element
     
-     var cellImageView: UIImageView = {
+    var cellImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "hero")
+        imageView.image = UIImage(contentsOfFile: Constants.Images.noNameBackground)
         imageView.clipsToBounds = true
-         imageView.layer.cornerRadius = 12
+        imageView.layer.cornerRadius = 12
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -38,15 +38,13 @@ class CollectionViewCell: UICollectionViewCell {
         addSubview(cellImageView)
     }
     
-    public func cell2HeroConfigure(with image: UIImage) {
+    public func cellPetConfigure(with image: UIImage) {
         cellImageView.image = image
     }
     
     //MARK: - Constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-      
-            
             cellImageView.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             cellImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
             cellImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),

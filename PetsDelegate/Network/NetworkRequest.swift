@@ -1,6 +1,6 @@
 //
 //  NetworkDataFetch.swift
-//  Heroes Marvel vs DC
+//  PetsDelegate
 //
 //  Created by Nikita Putilov on 14.12.2024.
 //
@@ -12,23 +12,6 @@ class NetworkRequest {
     static let shared = NetworkRequest()
     private init() {}
     
-    func requestData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        
-        let urlString = url
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, responce, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                guard let data = data else { return }
-                completion(.success(data))
-            }
-        }.resume()
-    }
-    
     func fetchHTTPAnimalsImage(animal: String, statusCode: Int, completion: @escaping (Int, UIImage?) -> Void) {
         let urlString = "https://http.\(animal)/\(statusCode).jpg"
         guard let url = URL(string: urlString) else {
@@ -38,7 +21,6 @@ class NetworkRequest {
         }
         
         let task = URLSession.shared.dataTask(with: url) { (data, responce, error) in
-            
             if let error = error {
                 print("Ошибка кода статуса: \(statusCode) : \(error.localizedDescription)")
                 completion(statusCode, nil)
@@ -53,4 +35,3 @@ class NetworkRequest {
         task.resume()
     }
 }
-

@@ -1,14 +1,14 @@
 //
 //  CollectionViewController.swift
-//  Heroes Marvel vs DC
+//  PetsDelegate
 //
 //  Created by Nikita Putilov on 11.12.2024.
 //
 
 import UIKit
 
-protocol SelectHeroProtocol: UIViewController {
-    func selectHero(image: UIImage, name: String)
+protocol SelectPetProtocol: UIViewController {
+    func selectPet(image: UIImage, name: String)
 }
 
 class CollectionViewController: UIViewController {
@@ -16,7 +16,7 @@ class CollectionViewController: UIViewController {
     //MARK: - UI elements
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "background")
+        imageView.image = UIImage(named: Constants.Images.mainBackground)
         imageView.alpha = 0.2
         return imageView
     }()
@@ -44,10 +44,8 @@ class CollectionViewController: UIViewController {
         return collectionView
     }()
     
-    var isUsingArray = true
     var petArray = [UIImage]()
-    var catArray = [UIImage]()
-    weak var selectHeroDelegate: SelectHeroProtocol?
+    weak var selectPetDelegate: SelectPetProtocol?
     
     //MARK: - Life cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +77,6 @@ class CollectionViewController: UIViewController {
     //MARK: - Constraints
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
             petLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             petLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             petLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -93,7 +90,6 @@ class CollectionViewController: UIViewController {
 }
 
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         petArray.count
     }
@@ -103,7 +99,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
                                                       for: indexPath) as! CollectionViewCell
         
         let model = petArray[indexPath.row]
-        cell.cell2HeroConfigure(with: model)
+        cell.cellPetConfigure(with: model)
         
         return cell
     }
@@ -114,11 +110,10 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell
         
         guard let image = cell?.cellImageView.image else { return }
         
-        selectHeroDelegate?.selectHero(image: image, name: "DOG!")
+        selectPetDelegate?.selectPet(image: image, name: "DOG!")
     }
 }
