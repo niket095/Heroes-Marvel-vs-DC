@@ -1,6 +1,6 @@
-# PetDelegate
+# PetsDelegate
 
-PetDelegate is an engaging mobile application for iOS that allows users to learn about HTTP status codes using funny images of cats and dogs.
+PetsDelegate is an engaging mobile application for iOS that allows users to learn about HTTP status codes using funny images of cats and dogs.
 
 ### Main Features
 - Main Screen: The main screen displays a large black-and-white image of an unknown character and two buttons: "CAT" and "DOG".
